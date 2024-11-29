@@ -6,4 +6,4 @@ donde tienes que superar ciertos obstaculos saltando o esquivando.
 Hector: He utilizado de base la app de mover el div para una pantalla de juego muy basica con un div que se mueve,
 y he investigado un poco sobre canva para realizar el escenario de juego.
 
-Borja:
+Borja: He buscado las imagenes para los diferentes obstaculos del juego y sobre como realizar el escenario del juego con canva.
