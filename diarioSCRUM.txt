@@ -1,0 +1,9 @@
+Reunion 29 noviembre:
+Ademas de investigar y setear el github hemos comenzado con la base del programa
+Que la idea es algo parecido a un Geometry dash que es un juego de plataformas 
+donde tienes que superar ciertos obstaculos saltando o esquivando.
+
+Hector: He utilizado de base la app de mover el div para una pantalla de juego muy basica con un div que se mueve,
+y he investigado un poco sobre canva para realizar el escenario de juego.
+
+Borja:

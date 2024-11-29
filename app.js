@@ -36,7 +36,7 @@ function update() {
     }
 
     // Salto
-    if (keys['Space'] && !player.isJumping) {
+    if (keys['arrowup'] && !player.isJumping) {
         player.velocityY = -player.jumpPower;
         player.isJumping = true;
     }
