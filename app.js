@@ -6,7 +6,7 @@ let player = {
     y: 300,
     width: 30,
     height: 30,
-    speed: 2, // Velocidad de movimiento constante
+    speed: 3,
     gravity: 0.5,
     jumpPower: 10,
     velocityY: 0,
@@ -17,11 +17,35 @@ let keys = {};
 let obstacles = [];
 let obstacleFrequency = 150; // Frecuencia de aparición de obstáculos
 let frameCount = 0;
+let lastObstacleX = canvas.width; // Posición del último obstáculo
+const minDistance = 100; // Distancia mínima entre obstáculos
+
+function getRandomObstacle() {
+    const type = Math.floor(Math.random() * 3); // 0: cuadrado, 1: rectángulo, 2: triángulo
+    let obstacle = {
+        x: canvas.width,
+        y: canvas.height - 40,
+        width: 30,
+        height: 40,
+        type: type
+    };
+
+    // Ajustar las propiedades del obstáculo según su tipo
+    if (type === 0) { // Cuadrado
+        obstacle.width = 30;
+        obstacle.height = 30;
+    } else if (type === 1) { // Rectángulo
+        obstacle.width = 30;
+        obstacle.height = 50;
+    } else if (type === 2) { // Triángulo
+        obstacle.width = 10;
+        obstacle.height = 40;
+    }
+
+    return obstacle;
+}
 
 function update() {
-    // Movimiento automático hacia la derecha
-    player.x += player.speed;
-
     // Gravedad
     player.velocityY += player.gravity;
     player.y += player.velocityY;
@@ -41,13 +65,11 @@ function update() {
 
     // Generar obstáculos
     if (frameCount % obstacleFrequency === 0) {
-        let obstacle = {
-            x: canvas.width,
-            y: canvas.height - 40, // Altura del obstáculo
-            width: 30,
-            height: 40
-        };
-        obstacles.push(obstacle);
+        if (lastObstacleX === canvas.width || (lastObstacleX - player.speed) >= minDistance) {
+            let obstacle = getRandomObstacle();
+            obstacles.push(obstacle);
+            lastObstacleX = obstacle.x; // Actualizar la posición del último obstáculo
+        }
     }
 
     // Mover y dibujar obstáculos
@@ -80,7 +102,7 @@ function update() {
     // Dibujar obstáculos
     ctx.fillStyle = 'black';
     for (let obstacle of obstacles) {
-        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width , obstacle.height);
     }
 
     frameCount++;
