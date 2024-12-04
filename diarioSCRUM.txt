@@ -7,3 +7,15 @@ Hector: He utilizado de base la app de mover el div para una pantalla de juego m
 y he investigado un poco sobre canva para realizar el escenario de juego.
 
 Borja: He buscado las imagenes para los diferentes obstaculos del juego y sobre como realizar el escenario del juego con canva.
+
+
+Reunion 4 diciembre:
+Avanzar en el programa la idea de la generacion de obstaculos y mejorar el escenario para que funcione como un escenario infinito
+Tenemos que ajustar mejor movimiento de jugador y escenario para que el flujo sea correcto y no se salga el cubo ni el escenario se mueva demasiado rapido
+
+Objetivos:
+-Generacion de obstaculos(correctamente)
+-escenario infinito
+-Coordinacion del movimiento del jugador y el escenario
+
+Hector: He avanzado en la generacion de obstaculos, he utilizado un array para generarlos.
