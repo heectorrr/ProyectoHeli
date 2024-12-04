@@ -35,11 +35,11 @@ function update() {
         player.velocityY = 0;
     }
 
-    // Salto
-    if (keys['arrowup'] && !player.isJumping) {
-        player.velocityY = -player.jumpPower;
-        player.isJumping = true;
-    }
+// Salto
+if (keys['ArrowUp'] && !player.isJumping) {
+    player.velocityY = -player.jumpPower;
+    player.isJumping = true;
+}
 
     // Limpiar el canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
