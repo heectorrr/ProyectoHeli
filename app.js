@@ -82,9 +82,10 @@ function update() {
             player.y < obstacles[i].y + obstacles[i].height &&
             player.y + player.height > obstacles[i].y) {
             // Colisión detectada
-            alert("¡Has chocado con un obstáculo!");
-            document.location.reload(); // Reiniciar el juego
-        }
+            // alert("¡Has chocado con un obstáculo!");
+            // document.location.update(); // Reiniciar el juego
+            // ctx.clearRect(0,0,canvas.width, canvas.height);
+        } 
 
         // Eliminar obstáculos que se han salido de la pantalla
         if (obstacles[i].x + obstacles[i].width < 0) {
