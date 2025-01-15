@@ -8,7 +8,7 @@ let player = {
     height: 30,
     speed: 3,
     gravity: 0.4,
-    jumpPower: 13,
+    jumpPower: 11,
     velocityY: 0,
     isJumping: false
 };
@@ -20,7 +20,7 @@ let frameCount = 0;
 let lastObstacleX = canvas.width; // Posición del último obstáculo
 const minDistance = 100; // Distancia mínima entre obstáculos
 let score = 0; // Contador de puntos
-let secondsSurvived = 0; // Contador de segundos sobrevividos
+let secondsSurvived = 0; // Contador de segundos
 let scoreInterval; // Intervalo para sumar puntos
 
 function getRandomObstacle() {
@@ -34,13 +34,13 @@ function getRandomObstacle() {
     };
 
     // tipos de obstaculos
-    if (type === 0) { // 1
+    if (type === 0) { 
         obstacle.width = 20;
         obstacle.height = 20;
-    } else if (type === 1) { // 2
+    } else if (type === 1) { 
         obstacle.width = 30;
         obstacle.height = 40;
-    } else if (type === 2) { // 3
+    } else if (type === 2) { 
         obstacle.width = 20;
         obstacle.height = 40;
     }
@@ -112,16 +112,9 @@ function update() {
     requestAnimationFrame(update);
 }
 function resetGame() {
-    console.log("Game reset!");
-    // Reiniciar jugador
-    player.x = 50;
-    player.y = 300;
-    player.velocityY = 0;
-    player.isJumping = false;
-
     // Limpiar obstáculos
     obstacles = [];
-    lastObstacleX = canvas.width; // Asegúrate de que esta línea esté correcta
+    lastObstacleX = canvas.width;
     score = 0; // Reiniciar el contador de puntos
     secondsSurvived = 0; // Reiniciar el contador de segundos
     clearInterval(scoreInterval); // Limpiar el intervalo de puntuación
@@ -136,9 +129,13 @@ function startScoreInterval() {
         secondsSurvived++;
         score += 10; // Sumar 10 puntos por cada segundo
         document.getElementById('score').innerText = `Puntos: ${score}`; // Actualizar el contador de puntos
+        if (score % 100 === 0) { // Verificar si se alcanzó un múltiplo de 100
+            player.speed += 2; // Aumentar la velocidad del jugador
+            console.log(`Velocidad aumentada: ${player.speed}`); // Mostrar la nueva velocidad
+        }
     }, 1000); // Cada segundo
 }
-// Manejo de eventos de teclado
+// eventos de teclado
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
 });
