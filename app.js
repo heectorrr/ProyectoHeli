@@ -7,8 +7,8 @@ let player = {
     width: 30,
     height: 30,
     speed: 3,
-    gravity: 0.5,
-    jumpPower: 10,
+    gravity: 0.4,
+    jumpPower: 13,
     velocityY: 0,
     isJumping: false
 };
@@ -19,6 +19,9 @@ let obstacleFrequency = 150; // Frecuencia de aparición de obstáculos
 let frameCount = 0;
 let lastObstacleX = canvas.width; // Posición del último obstáculo
 const minDistance = 100; // Distancia mínima entre obstáculos
+let score = 0; // Contador de puntos
+let secondsSurvived = 0; // Contador de segundos sobrevividos
+let scoreInterval; // Intervalo para sumar puntos
 
 function getRandomObstacle() {
     const type = Math.floor(Math.random() * 3); // 0: cuadrado, 1: rectángulo, 2: triángulo
@@ -30,21 +33,20 @@ function getRandomObstacle() {
         type: type
     };
 
-    // Ajustar las propiedades del obstáculo según su tipo
-    if (type === 0) { // Cuadrado
+    // tipos de obstaculos
+    if (type === 0) { // 1
+        obstacle.width = 20;
+        obstacle.height = 20;
+    } else if (type === 1) { // 2
         obstacle.width = 30;
-        obstacle.height = 30;
-    } else if (type === 1) { // Rectángulo
-        obstacle.width = 30;
-        obstacle.height = 50;
-    } else if (type === 2) { // Triángulo
-        obstacle.width = 10;
+        obstacle.height = 40;
+    } else if (type === 2) { // 3
+        obstacle.width = 20;
         obstacle.height = 40;
     }
 
     return obstacle;
 }
-
 function update() {
     // Gravedad
     player.velocityY += player.gravity;
@@ -82,9 +84,9 @@ function update() {
             player.y < obstacles[i].y + obstacles[i].height &&
             player.y + player.height > obstacles[i].y) {
             // Colisión detectada
-            // alert("¡Has chocado con un obstáculo!");
-            // document.location.update(); // Reiniciar el juego
-            // ctx.clearRect(0,0,canvas.width, canvas.height);
+            console.log("Collision detected! Resetting game...");
+            resetGame(); // Reiniciar el juego
+            return; // Salir de la función para evitar más actualizaciones
         } 
 
         // Eliminar obstáculos que se han salido de la pantalla
@@ -103,13 +105,39 @@ function update() {
     // Dibujar obstáculos
     ctx.fillStyle = 'black';
     for (let obstacle of obstacles) {
-            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width , obstacle.height);
+        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     }
 
     frameCount++;
     requestAnimationFrame(update);
 }
+function resetGame() {
+    console.log("Game reset!");
+    // Reiniciar jugador
+    player.x = 50;
+    player.y = 300;
+    player.velocityY = 0;
+    player.isJumping = false;
 
+    // Limpiar obstáculos
+    obstacles = [];
+    lastObstacleX = canvas.width; // Asegúrate de que esta línea esté correcta
+    score = 0; // Reiniciar el contador de puntos
+    secondsSurvived = 0; // Reiniciar el contador de segundos
+    clearInterval(scoreInterval); // Limpiar el intervalo de puntuación
+    document.getElementById('score').innerText = `Puntos: ${score}`; // Actualizar el contador de puntos
+    startScoreInterval(); // Iniciar el intervalo de puntuación
+    frameCount = 0; // Reiniciar el contador de frames
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas al reiniciar
+    update();
+}
+function startScoreInterval() {
+    scoreInterval = setInterval(() => {
+        secondsSurvived++;
+        score += 10; // Sumar 10 puntos por cada segundo
+        document.getElementById('score').innerText = `Puntos: ${score}`; // Actualizar el contador de puntos
+    }, 1000); // Cada segundo
+}
 // Manejo de eventos de teclado
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
@@ -119,5 +147,9 @@ window.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
 
+// Manejo del botón de reinicio
+document.getElementById('restartButton').addEventListener('click', resetGame);
+
 // Iniciar el juego
+startScoreInterval();
 update();

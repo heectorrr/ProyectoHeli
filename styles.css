@@ -1,0 +1,39 @@
+canvas {
+    border: 1px solid black;
+    background-color: #87CEEB; /* Color de fondo (cielo) */
+}
+/* Estilo para el contenedor del menú */
+#menu {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+}
+
+/* Estilo para el contador de puntos */
+#score {
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #333; /* Borde del recuadro */
+    background-color: #f0f0f0; /* Color de fondo del recuadro */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centrar el texto */
+}
+
+/* Estilo para el botón de reinicio */
+#restartButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+}
+
+/* Efecto hover para el botón de reinicio */
+#restartButton:hover {
+    background-color: #45a049; /* Color de fondo al pasar el mouse */
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
+}
